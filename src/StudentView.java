@@ -69,3 +69,75 @@ public class StudentView {
 
         createMenuBar();
     }
+
+    private void createMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        JMenu fileMenu = new JMenu("File");
+        JMenu helpMenu = new JMenu("Help");
+
+        JMenuItem exitItem = new JMenuItem("Exit");
+        JMenuItem aboutItem = new JMenuItem("About");
+
+        exitItem.addActionListener(e -> System.exit(0));
+        aboutItem.addActionListener(e ->
+                JOptionPane.showMessageDialog(frame, "Student Information System\nJava Swing Project")
+        );
+
+        fileMenu.add(exitItem);
+        helpMenu.add(aboutItem);
+        menuBar.add(fileMenu);
+        menuBar.add(helpMenu);
+
+        frame.setJMenuBar(menuBar);
+    }
+
+    public void setVisible(boolean visible) {
+        frame.setVisible(visible);
+    }
+
+    public String getNameInput() {
+        return nameField.getText();
+    }
+
+    public String getCourseInput() {
+        return (String) courseBox.getSelectedItem();
+    }
+
+    public void clearInputs() {
+        nameField.setText("");
+        courseBox.setSelectedIndex(0);
+    }
+
+    public void addStudentToTable(String name, String course) {
+        tableModel.addRow(new Object[]{name, course});
+    }
+
+    public DefaultTableModel getTableModel() {
+        return tableModel;
+    }
+
+    public void selectTableRow(int index) {
+        table.setRowSelectionInterval(index, index);
+    }
+
+    public void showMessage(String message) {
+        JOptionPane.showMessageDialog(frame, message);
+    }
+
+    public String showInputDialog(String message) {
+        return JOptionPane.showInputDialog(message);
+    }
+
+    // Listener setters
+    public void addSaveListener(ActionListener listener) {
+        saveButton.addActionListener(listener);
+    }
+
+    public void addClearListener(ActionListener listener) {
+        clearButton.addActionListener(listener);
+    }
+
+    public void addSearchListener(ActionListener listener) {
+        searchButton.addActionListener(listener);
+    }
+}
